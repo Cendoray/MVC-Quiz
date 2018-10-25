@@ -1,0 +1,14 @@
+﻿﻿﻿@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1>Categories</h1>
+<br/>
+<div class="form-horizontal">
+    @foreach (var x in Model)
+    {
+        <div class="form-group">
+            <p>@x</p>
+        </div>
+    }
+</div>

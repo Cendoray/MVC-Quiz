@@ -1,0 +1,43 @@
+﻿@model Quiz.Models.QuizQuestions
+@{
+    ViewBag.Title = "Login Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Answer page</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>Here are your answers</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @{
+        int correctAnswers = 0;
+        for (int i = 0; i < @Model.answer1.Count; i++)
+        {
+            <div class="form-group">
+                @Html.Label("Your Answer : " +  @Model.userAnswer[@i], htmlAttributes: new { @class = "control-label col-md-2" })
+            </div>
+            <div class="form-group">
+
+                @Html.Label("Correct Answer : " + @Model.correctAnswer[@i], htmlAttributes: new { @class = "control-label col-md-2" })
+            </div>
+            if (@Model.correctAnswer[@i] == @Model.userAnswer[@i])
+            {
+                correctAnswers++;
+            }
+        }
+    }
+    <div class="form-group">
+        @Html.Label("Total Amount of Correct Answers: " + @correctAnswers + " / " + @Model.correctAnswer.Count, htmlAttributes: new { @class = "control-label col-md-2" })
+    </div>
+
+</div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to Main Menu", "LoggedIndex", "Category")
+    </div>
